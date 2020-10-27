@@ -1,6 +1,6 @@
 {
   "name": "electron-auto-update-example",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "main.js",
   "repository": {
@@ -10,8 +10,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron .",
-    "build": "electron-builder build --dist --win --publish never",
-    "deploy": "electron-builder build --dist --win --publish always"
+    "build": "electron-builder build -w -p never",
+    "deploy": "electron-builder build -w -p always"
   },
   "author": "",
   "license": "ISC",
