@@ -50,22 +50,24 @@
       version.innerText = 'Version ' + arg.version;
     });
 
-    ipcRenderer.on('update_not_available', () => {
-      ipcRenderer.removeAllListeners('update_not_available');
-      version.innerText = 'A new update is not available right now';
+    ipcRenderer.on('download-progress', (event, arg) => {
+      console.log('download-progress event: ',event)
+      console.log('download-progress arg: ',arg)
     });
 
+    ipcRenderer.on('error', (event, arg) => {
+      console.log('Error event: ',event)
+      console.log('Error arg: ',arg)
+    });
 
     ipcRenderer.on('update_available', () => {
       ipcRenderer.removeAllListeners('update_available');
-      version.innerText = 'A new update is available. Downloading now...';
       message.innerText = 'A new update is available. Downloading now...';
       notification.classList.remove('hidden');
     });
 
     ipcRenderer.on('update_downloaded', () => {
       ipcRenderer.removeAllListeners('update_downloaded');
-      version.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
       message.innerText = 'Update Downloaded. It will be installed on restart. Restart now?';
       restartButton.classList.remove('hidden');
       notification.classList.remove('hidden');

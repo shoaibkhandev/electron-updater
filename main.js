@@ -35,20 +35,20 @@ app.on('activate', function () {
 });
 
 ipcMain.on('app_version', (event) => {
-  console.log('app_version',app.getVersion());
   event.sender.send('app_version', { version: app.getVersion() });
 });
 
 autoUpdater.on('update-available', () => {
-  console.log('update-available')
   mainWindow.webContents.send('update_available');
 });
 
-/*New Update Available*/
-autoUpdater.on("update-available", info => {
-  console.log('update not available')
-  mainWindow.webContents.send('update_not_available');
-});
+autoUpdater.on('error', err => {
+  mainWindow.webContents.send('error: ',err.toString());
+})
+
+autoUpdater.on('download-progress', processObj => {
+  mainWindow.webContents.send(`Download speed: ${processObj.bytesPerSecond} - Downloaded ${processObj.percent}% (${process.transfer})`);
+})
 
 autoUpdater.on('update-downloaded', () => {
   mainWindow.webContents.send('update_downloaded');
