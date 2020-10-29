@@ -1,5 +1,5 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
-// const { autoUpdater } = require('electron-updater');
+const { autoUpdater } = require('electron-updater');
 
 let mainWindow;
 
@@ -11,14 +11,14 @@ function createWindow () {
       nodeIntegration: true,
     },
   });
-  mainWindow.loadFile('index2.html');
+  mainWindow.loadFile('index.html');
   mainWindow.on('closed', function () {
     mainWindow = null;
   });
 }
 
 app.on('ready', () => {
-  // autoUpdater.checkForUpdatesAndNotify();
+  autoUpdater.checkForUpdatesAndNotify();
   createWindow();
 });
 
